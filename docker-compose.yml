@@ -3,6 +3,7 @@
 
 services:
   postgresql:
+    container_name: postgresql
     image: docker.io/bitnami/postgresql:latest
     ports:
       - "5432:5432"
@@ -14,14 +15,17 @@ services:
       - POSTGRESQL_USERNAME=nestjs
       - POSTGRESQL_PASSWORD=password
 
-  app:
-    image: nest-app-stebin:latest
+  nestjs:
+    container_name: nestjs
+    build: .
     ports:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
     depends_on:
       - postgresql
+    env_file:
+      - .env
 
 volumes:
   postgresql_data:
