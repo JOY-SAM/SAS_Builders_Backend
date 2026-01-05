@@ -27,6 +27,22 @@ services:
     env_file:
       - .env
 
+  studio:
+    container_name: studio
+    image: node:20-alpine
+    ports:
+      - "5555:5555"
+    working_dir: /home/node
+    volumes:
+      - ./:/home/node
+    environment:
+      - POSTGRESQL_USERNAME=nestjs
+      - POSTGRESQL_PASSWORD=password
+      - POSTGRESQL_DATABASE=nestjs
+      # Reconstruct the connection string for Prisma
+      - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
+    command: npx prisma studio
+
 volumes:
   postgresql_data:
     driver: local
