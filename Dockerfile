@@ -14,6 +14,8 @@
 
 FROM node:20-alpine AS builder
 
+RUN apk add --no-cache openssl
+
 ENV NODE_ENV=build
 
 USER node
