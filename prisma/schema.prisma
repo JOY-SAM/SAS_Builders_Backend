@@ -11,17 +11,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Passenger {
-  id        Int    @id @default(autoincrement())
-  firstName String @unique
-  lastName  String
-}
-
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
+  name      String?  @map("full_name")
   password  String
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isAdmin   BigInt   @map("is_admin")
+  isDriver  BigInt   @map("is_driver")
+
+  expenses Expense[]
+
+  @@map("users")
+}
+
+model Vehicle {
+  id                     Int      @id @default(autoincrement())
+  number                 String?
+  name                   String?
+  category               String?
+  oilLastChanged         DateTime @default(now()) @map("oil_last_changed") // Default to confirm with SQL "DEFAULT CURRENT_DATE" or just DateTime
+  oilChangeIntervalHours Int?     @map("oil_change_interval_hours")
+  totalHoursRan          Int?     @map("total_hours_ran")
+  description            String?
+  createdAt              DateTime @default(now()) @map("created_at")
+
+  expenses Expense[]
+
+  @@map("vehicles")
+}
+
+model Expense {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @map("user_id")
+  vehicleId   Int      @map("vehicle_id")
+  category    BigInt
+  amount      Decimal  @db.Decimal(10, 2)
+  description String
+  expenseTime DateTime @default(now()) @map("expense_time")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id])
+  vehicle Vehicle @relation(fields: [vehicleId], references: [id])
+
+  @@map("expenses")
 }

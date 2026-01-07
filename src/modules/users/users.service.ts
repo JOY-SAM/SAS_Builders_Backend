@@ -13,6 +13,8 @@ export class UsersService {
         email: data.email,
         password: data.password, // Password should be hashed before calling this or handled here. Plan says Auth handles hashing.
         name: data.name,
+        isAdmin: BigInt(0),
+        isDriver: BigInt(0),
       },
     });
   }
