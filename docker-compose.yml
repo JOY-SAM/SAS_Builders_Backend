@@ -41,6 +41,8 @@ services:
       - POSTGRESQL_DATABASE=nestjs
       # Reconstruct the connection string for Prisma
       - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
+    depends_on:
+      - postgresql
     command: npx prisma studio
 
   migrate:
