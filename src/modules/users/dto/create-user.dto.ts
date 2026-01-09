@@ -12,4 +12,7 @@ export class CreateUserDto {
 
   @ApiProperty({ example: 'local', description: 'The provider of the user', required: false })
   provider?: string;
+
+  @ApiProperty({ example: '+1234567890', description: 'The phone number of the user' })
+  phoneNumber: string;
 }
