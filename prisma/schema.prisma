@@ -12,14 +12,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?  @map("full_name")
-  password  String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isAdmin   BigInt   @map("is_admin")
-  isDriver  BigInt   @map("is_driver")
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  name        String?  @map("full_name")
+  password    String
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  isAdmin     BigInt   @map("is_admin")
+  isDriver    BigInt   @map("is_driver")
+  phoneNumber String
 
   expenses Expense[]
 
