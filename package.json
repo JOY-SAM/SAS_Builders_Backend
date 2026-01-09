@@ -68,5 +68,8 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

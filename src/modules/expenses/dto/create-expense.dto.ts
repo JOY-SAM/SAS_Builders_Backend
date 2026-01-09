@@ -7,8 +7,8 @@ export class CreateExpenseDto {
   @ApiProperty({ example: 1, description: 'Vehicle ID associated with the expense' })
   vehicleId: number;
 
-  @ApiProperty({ example: 1, description: 'Category of the expense' })
-  category: number;
+  @ApiProperty({ example: 'Fuel', description: 'Category of the expense' })
+  category: string;
 
   @ApiProperty({ example: 150.50, description: 'Amount of the expense' })
   amount: number;

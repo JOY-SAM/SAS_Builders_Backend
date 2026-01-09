@@ -12,8 +12,8 @@ export class ExpenseEntity implements Expense {
   @ApiProperty({ example: 1, description: 'Vehicle ID associated with the expense' })
   vehicleId: number;
 
-  @ApiProperty({ example: 1, description: 'Category of the expense', type: 'number' })
-  category: bigint;
+  @ApiProperty({ example: 'Fuel', description: 'Category of the expense' })
+  category: string;
 
   @ApiProperty({ example: 150.50, description: 'Amount of the expense', type: 'number' })
   amount: Decimal;

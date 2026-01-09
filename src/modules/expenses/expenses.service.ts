@@ -12,7 +12,7 @@ export class ExpensesService {
     return this.prisma.expense.create({
       data: {
         ...rest,
-        category: BigInt(category),
+        category: category,
         expenseTime: expenseTime ? new Date(expenseTime) : undefined,
       },
     });
@@ -33,7 +33,7 @@ export class ExpensesService {
     const data: any = { ...rest };
 
     if (category !== undefined) {
-      data.category = BigInt(category);
+      data.category = category;
     }
     if (expenseTime) {
       data.expenseTime = new Date(expenseTime);
