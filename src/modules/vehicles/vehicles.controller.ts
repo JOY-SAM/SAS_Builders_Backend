@@ -11,30 +11,30 @@ export class VehiclesController {
   constructor(private readonly vehiclesService: VehiclesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new vehicle' })
-  @ApiResponse({ status: 201, description: 'The vehicle has been successfully created.', type: VehicleEntity })
+  @ApiOperation({ summary: 'Create a new vehicle', description: 'Request Body: CreateVehicleDto, Response: VehicleEntity' })
+  @ApiResponse({ status: 201, description: 'The vehicle has been successfully created. (VehicleEntity)', type: VehicleEntity })
   create(@Body() createVehicleDto: CreateVehicleDto) {
     return this.vehiclesService.create(createVehicleDto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all vehicles' })
-  @ApiResponse({ status: 200, description: 'Return all vehicles.', type: VehicleEntity, isArray: true })
+  @ApiOperation({ summary: 'Get all vehicles', description: 'Response: VehicleEntity[]' })
+  @ApiResponse({ status: 200, description: 'Return all vehicles. (VehicleEntity[])', type: VehicleEntity, isArray: true })
   findAll() {
     return this.vehiclesService.findAll();
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a vehicle by ID' })
-  @ApiResponse({ status: 200, description: 'Return the vehicle.', type: VehicleEntity })
+  @ApiOperation({ summary: 'Get a vehicle by ID', description: 'Params: id (number), Response: VehicleEntity' })
+  @ApiResponse({ status: 200, description: 'Return the vehicle. (VehicleEntity)', type: VehicleEntity })
   @ApiResponse({ status: 404, description: 'Vehicle not found.' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.vehiclesService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update a vehicle' })
-  @ApiResponse({ status: 200, description: 'The vehicle has been successfully updated.', type: VehicleEntity })
+  @ApiOperation({ summary: 'Update a vehicle', description: 'Params: id (number), Request Body: UpdateVehicleDto, Response: VehicleEntity' })
+  @ApiResponse({ status: 200, description: 'The vehicle has been successfully updated. (VehicleEntity)', type: VehicleEntity })
   update(@Param('id', ParseIntPipe) id: number, @Body() updateVehicleDto: UpdateVehicleDto) {
     return this.vehiclesService.update(id, updateVehicleDto);
   }

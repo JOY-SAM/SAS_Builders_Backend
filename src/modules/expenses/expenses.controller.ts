@@ -11,37 +11,37 @@ export class ExpensesController {
   constructor(private readonly expensesService: ExpensesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Create a new expense' })
-  @ApiResponse({ status: 201, description: 'The expense has been successfully created.', type: ExpenseEntity })
+  @ApiOperation({ summary: 'Create a new expense', description: 'Request Body: CreateExpenseDto, Response: ExpenseEntity' })
+  @ApiResponse({ status: 201, description: 'The expense has been successfully created. (ExpenseEntity)', type: ExpenseEntity })
   create(@Body() createExpenseDto: CreateExpenseDto) {
     return this.expensesService.create(createExpenseDto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all expenses' })
-  @ApiResponse({ status: 200, description: 'Return all expenses.', type: ExpenseEntity, isArray: true })
+  @ApiOperation({ summary: 'Get all expenses', description: 'Response: ExpenseEntity[]' })
+  @ApiResponse({ status: 200, description: 'Return all expenses. (ExpenseEntity[])', type: ExpenseEntity, isArray: true })
   findAll() {
     return this.expensesService.findAll();
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get an expense by ID' })
-  @ApiResponse({ status: 200, description: 'Return the expense.', type: ExpenseEntity })
+  @ApiOperation({ summary: 'Get an expense by ID', description: 'Params: id (number), Response: ExpenseEntity' })
+  @ApiResponse({ status: 200, description: 'Return the expense. (ExpenseEntity)', type: ExpenseEntity })
   @ApiResponse({ status: 404, description: 'Expense not found.' })
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.expensesService.findOne(id);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Update an expense' })
-  @ApiResponse({ status: 200, description: 'The expense has been successfully updated.', type: ExpenseEntity })
+  @ApiOperation({ summary: 'Update an expense', description: 'Params: id (number), Request Body: UpdateExpenseDto, Response: ExpenseEntity' })
+  @ApiResponse({ status: 200, description: 'The expense has been successfully updated. (ExpenseEntity)', type: ExpenseEntity })
   update(@Param('id', ParseIntPipe) id: number, @Body() updateExpenseDto: UpdateExpenseDto) {
     return this.expensesService.update(id, updateExpenseDto);
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete an expense' })
-  @ApiResponse({ status: 200, description: 'The expense has been successfully deleted.', type: ExpenseEntity })
+  @ApiOperation({ summary: 'Delete an expense', description: 'Params: id (number), Response: ExpenseEntity' })
+  @ApiResponse({ status: 200, description: 'The expense has been successfully deleted. (ExpenseEntity)', type: ExpenseEntity })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.expensesService.remove(id);
   }
