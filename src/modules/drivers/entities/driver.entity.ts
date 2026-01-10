@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Driver } from '@prisma/client';
 
-export class DriverEntity implements Driver {
+export class DriverEntity {
   @ApiProperty({ example: 1, description: 'Unique identifier of the driver' })
   id: number;
 

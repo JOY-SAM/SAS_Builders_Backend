@@ -14,11 +14,11 @@ export class UserEntity implements User {
   @ApiProperty({ description: 'User password', writeOnly: true })
   password: string;
 
-  @ApiProperty({ example: 0, description: 'Is user an admin' })
-  isAdmin: bigint;
+  @ApiProperty({ example: false, description: 'Is user an admin' })
+  isAdmin: boolean;
 
-  @ApiProperty({ example: 0, description: 'Is user a driver' })
-  isDriver: bigint;
+  @ApiProperty({ example: false, description: 'Is user a driver' })
+  isDriver: boolean;
 
   @ApiProperty({ example: '+1234567890', description: 'User phone number' })
   phoneNumber: string;
