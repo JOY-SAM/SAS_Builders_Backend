@@ -7,6 +7,8 @@ import { VehiclesModule } from './vehicles/vehicles.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { DriversModule } from './drivers/drivers.module';
 
+import { OilExpenseModule } from './oil-expense/oil-expense.module';
+
 @Module({
     imports: [
         CommonModule,
@@ -15,6 +17,7 @@ import { DriversModule } from './drivers/drivers.module';
         VehiclesModule,
         ExpensesModule,
         DriversModule,
+        OilExpenseModule,
     ]
 })
 export class ApplicationModule {}

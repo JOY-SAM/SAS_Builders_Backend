@@ -11,7 +11,7 @@ export class VehiclesService {
     return this.prisma.vehicle.create({
       data: {
         ...createVehicleDto,
-        oilLastChanged: createVehicleDto.oilLastChanged ? new Date(createVehicleDto.oilLastChanged) : undefined,
+        oilLastChangedHour: createVehicleDto.oilLastChangedHour,
       },
     });
   }
@@ -31,7 +31,7 @@ export class VehiclesService {
       where: { id },
       data: {
         ...updateVehicleDto,
-        oilLastChanged: updateVehicleDto.oilLastChanged ? new Date(updateVehicleDto.oilLastChanged) : undefined,
+        oilLastChangedHour: updateVehicleDto.oilLastChangedHour,
       },
     });
   }

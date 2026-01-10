@@ -28,7 +28,7 @@ model Vehicle {
   number                 String?
   name                   String?
   category               String?
-  oilLastChanged         DateTime  @default(now()) @map("oil_last_changed")
+  oilLastChangedHour     Int?      @map("oil_last_changed_hour")
   oilChangeIntervalHours Int?      @map("oil_change_interval_hours")
   totalHoursRan          Int?      @map("total_hours_ran")
   description            String?
