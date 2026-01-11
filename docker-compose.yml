@@ -19,7 +19,7 @@ services:
     container_name: nestjs
     build: .
     ports:
-      - "3000:3000"
+      - "3001:3001"
     environment:
       - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
     depends_on:

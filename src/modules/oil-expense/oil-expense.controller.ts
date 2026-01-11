@@ -25,6 +25,18 @@ export class OilExpenseController {
     return this.oilExpenseService.findAll();
   }
 
+  @Get('oil_change/notification')
+  @ApiOperation({ summary: 'Get vehicles with less than 100 hours left for oil change', description: 'Response: OilExpenseStatusEntity[]' })
+  @ApiResponse({
+    status: 200,
+    description: 'List of vehicles needing oil change soon (OilExpenseStatusEntity[])',
+    type: OilExpenseStatusEntity,
+    isArray: true,
+  })
+  getNotificationVehicles() {
+    return this.oilExpenseService.getNotificationVehicles();
+  }
+
   @Patch(':vehicleId')
   @ApiOperation({ summary: 'Update oil change interval for a vehicle', description: 'Params: vehicleId (number), Request Body: UpdateOilIntervalDto, Response: VehicleEntity' })
   @ApiResponse({ status: 200, description: 'Interval updated successfully (VehicleEntity)', type: VehicleEntity })

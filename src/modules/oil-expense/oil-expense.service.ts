@@ -41,6 +41,11 @@ export class OilExpenseService {
     });
   }
 
+  async getNotificationVehicles() {
+    const allVehicles = await this.findAll();
+    return allVehicles.filter(vehicle => vehicle.hoursLeft < 100);
+  }
+
   async updateInterval(vehicleId: number, updateDto: UpdateOilIntervalDto) {
     const vehicle = await this.prisma.vehicle.findUnique({
       where: { id: vehicleId },
