@@ -12,10 +12,13 @@
     "clean": "rimraf ./dist",
     "start": "node dist/server.js",
     "dev": "env-cmd -f .env nodemon",
+    "dev:docker": "nodemon",
     "build": "npm run clean && tsc",
     "test": "env-cmd -f .env jest --config=jest.json",
     "lint": "eslint -c .eslintrc.js --ext .ts 'src/**/*.ts'",
-    "create-admin": "ts-node scripts/create-admin.ts"
+    "create-admin": "ts-node scripts/create-admin.ts",
+    "docker:dev": "docker compose -f docker-compose.dev.yml up --build",
+    "docker:prod": "docker compose -f docker-compose.prod.yml up --build"
   },
   "dependencies": {
     "@fastify/helmet": "^11.1.1",

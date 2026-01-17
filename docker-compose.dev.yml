@@ -1,5 +1,4 @@
-# THIS DOCKERFILE IS INTENDED FOR DEVELOPMENT ENVIRONMENTS
-# DO NOT USE THIS FOR PRODUCTION USAGES.
+version: "3.8"
 
 services:
   postgresql:
@@ -17,11 +16,17 @@ services:
 
   nestjs:
     container_name: nestjs
-    build: .
+    build:
+      context: .
+      target: development
     ports:
       - "3001:3001"
+      - "9229:9229" # Debug port
     environment:
       - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     depends_on:
       - postgresql
     env_file:
@@ -31,31 +36,32 @@ services:
     container_name: prisma-studio
     build:
       context: .
-      target: builder
+      target: development
     ports:
       - "5555:5555"
-    working_dir: /home/node
     environment:
-      - POSTGRESQL_USERNAME=nestjs
-      - POSTGRESQL_PASSWORD=password
-      - POSTGRESQL_DATABASE=nestjs
-      # Reconstruct the connection string for Prisma
       - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
     depends_on:
       - postgresql
     command: npx prisma studio
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
   migrate:
     container_name: prisma-migrate
     build:
       context: .
-      target: builder
+      target: development
     environment:
       - DATABASE_URL=postgresql://nestjs:password@postgresql:5432/nestjs
     command: npx prisma db push
     depends_on:
       - postgresql
     restart: on-failure
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
 
 volumes:
   postgresql_data:
