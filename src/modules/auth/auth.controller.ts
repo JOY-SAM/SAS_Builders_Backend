@@ -1,17 +1,18 @@
 import { Controller, Post, Body, UnauthorizedException } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateUserDto } from '../users/dto/create-user.dto';
+
 import { LoginDto } from './dto/login.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { LoginResponseDto } from './dto/login-response.dto';
-import { UserEntity } from '../users/entities/user.entity';
+
+import { Public } from '../../common/decorators/public.decorator';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @Post('login')
+  @Public()
   @Post('login')
   @ApiOperation({ summary: 'User login', description: 'Request Body: LoginDto, Response: LoginResponseDto' })
   @ApiResponse({ status: 200, description: 'Return JWT access token (LoginResponseDto)', type: LoginResponseDto })
@@ -24,10 +25,10 @@ export class AuthController {
     return this.authService.login(user);
   }
 
-  @Post('register')
-  @ApiOperation({ summary: 'User registration', description: 'Request Body: CreateUserDto, Response: UserEntity' })
-  @ApiResponse({ status: 201, description: 'User successfully created (UserEntity)', type: UserEntity })
-  async register(@Body() createUserDto: CreateUserDto) {
-    return this.authService.register(createUserDto);
-  }
+  // @Post('register')
+  // @ApiOperation({ summary: 'User registration', description: 'Request Body: CreateUserDto, Response: UserEntity' })
+  // @ApiResponse({ status: 201, description: 'User successfully created (UserEntity)', type: UserEntity })
+  // async register(@Body() createUserDto: CreateUserDto) {
+  //   return this.authService.register(createUserDto);
+  // }
 }

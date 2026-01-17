@@ -5,6 +5,7 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagg
 import { PrismaService } from '../provider';
 import { HealthGuard } from '../security/health.guard';
 import { HealthEntity } from '../entities/health.entity';
+import { Public } from '../../../common/decorators/public.decorator';
 
 @ApiTags('Health')
 @ApiBearerAuth()
@@ -17,6 +18,7 @@ export class HealthController {
         private readonly prisma: PrismaService
     ) {}
 
+    @Public()
     @Get()
     @ApiOperation({ summary: 'Check application health', description: 'Response: HealthEntity' })
     @ApiResponse({ status: 200, description: 'Application is healthy (HealthEntity)', type: HealthEntity })

@@ -1,4 +1,6 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 import { CommonModule } from './common';
 import { UsersModule } from './users/users.module';
@@ -9,6 +11,7 @@ import { DriversModule } from './drivers/drivers.module';
 
 import { OilExpenseModule } from './oil-expense/oil-expense.module';
 
+
 @Module({
     imports: [
         CommonModule,
@@ -18,6 +21,13 @@ import { OilExpenseModule } from './oil-expense/oil-expense.module';
         ExpensesModule,
         DriversModule,
         OilExpenseModule,
-    ]
+    ],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: JwtAuthGuard,
+        },
+    ],
 })
+
 export class ApplicationModule {}
