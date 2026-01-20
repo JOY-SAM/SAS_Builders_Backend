@@ -52,6 +52,14 @@ function createSwagger(app: INestApplication) {
  */
 async function bootstrap(): Promise<void> {
 
+    // eslint-disable-next-line no-console
+    console.log('DEBUG: Starting bootstrap');
+    // eslint-disable-next-line no-console
+    console.log('DEBUG: API_PORT from env:', process.env.API_PORT);
+    // eslint-disable-next-line no-console
+    console.log('DEBUG: API_PREFIX from env:', process.env.API_PREFIX);
+
+
     const app = await NestFactory.create<NestFastifyApplication>(
         ApplicationModule,
         new FastifyAdapter()
@@ -74,7 +82,11 @@ async function bootstrap(): Promise<void> {
     const logInterceptor = app.select(CommonModule).get(LogInterceptor);
     app.useGlobalInterceptors(logInterceptor);
 
+    // eslint-disable-next-line no-console
+    console.log(`DEBUG: About to listen on port: ${process.env.API_PORT || API_DEFAULT_PORT}`);
     await app.listen(process.env.API_PORT || API_DEFAULT_PORT, '0.0.0.0');
+    // eslint-disable-next-line no-console
+    console.log('DEBUG: Listening started');
 }
 
 /**

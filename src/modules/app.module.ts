@@ -9,7 +9,9 @@ import { VehiclesModule } from './vehicles/vehicles.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { DriversModule } from './drivers/drivers.module';
 
+
 import { OilExpenseModule } from './oil-expense/oil-expense.module';
+import { PrismaStudioModule } from './prisma-studio/prisma-studio.module';
 
 
 @Module({
@@ -21,7 +23,7 @@ import { OilExpenseModule } from './oil-expense/oil-expense.module';
         ExpensesModule,
         DriversModule,
         OilExpenseModule,
-    ],
+        PrismaStudioModule,    ],
     providers: [
         {
             provide: APP_GUARD,
