@@ -29,6 +29,8 @@ jobs:
     name: Deploy to Server
     runs-on: ubuntu-latest
     needs: build
+    environment: 'CI/CD EC2'
+
     steps:
       - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
