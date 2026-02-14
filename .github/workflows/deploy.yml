@@ -40,17 +40,26 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            # Fail on any error
+            set -e
+
             # Navigate to project directory
             cd ${{ secrets.PROJECT_PATH }}
             
-            # Pull latest changes
-            git pull origin prod
+            # Match the remote exactly using SSH (requires deploy key)
+            git fetch git@github.com:${{ github.repository }}.git prod
             
-            # Update .env file
-            echo "${{ secrets.ENV_FILE }}" > .env
+            # Reset to match remote exactly (discards local changes)
+            # Use FETCH_HEAD to refer to the commit we just fetched
+            git reset --hard FETCH_HEAD
+            
+            # Update .env file safely
+            cat << 'EOF' > .env
+            ${{ secrets.ENV_FILE }}
+            EOF
             
             # Restart containers (Build & Run in detached mode)
             docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
             
-            # Cleanup unused images
-            docker image prune -f
+            # Cleanup unused images safely (keep last 72h)
+            docker image prune -f --filter "until=72h"

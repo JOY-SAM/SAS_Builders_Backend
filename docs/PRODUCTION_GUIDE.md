@@ -109,7 +109,49 @@ Add the following secrets:
 | `PROJECT_PATH` | `/home/ec2-user/SAS_Builders_Backend` |
 | `ENV_FILE` | Paste the **entire content** of your local production `.env` file here. |
 
-### 5.2 Trigger Deployment
+### 5.2 Configure SSH Keys for Git (CRITICAL)
+Since we are using a private repository, we need to authorize the server to pull code via SSH.
+
+1.  **Generate a deploy key on the server**:
+    ```bash
+    # Run this on your EC2 instance
+    ssh-keygen -t ed25519 -C "deploy_key" -f ~/.ssh/deploy_key 
+    ```
+
+2.  **Add public key to GitHub**:
+    -   Display the key: `cat ~/.ssh/deploy_key.pub`
+    -   Copy the output (starts with `ssh-ed25519`).
+    -   Go to your **GitHub Repo -> Settings -> Deploy keys -> Add deploy key**.
+    -   Title: "Production Server"
+    -   Key: Paste the key.
+    -   **Allow write access**: Leave UNCHECKED (read-only is safer).
+
+3.  **Configure local SSH to use this key**:
+    Create or edit `~/.ssh/config` on the server:
+    ```bash
+    nano ~/.ssh/config
+    ```
+    Add the following content:
+    ```text
+    Host github.com
+      IdentityFile ~/.ssh/deploy_key
+    ```
+    Save and exit (Ctrl+O, Enter, Ctrl+X).
+
+4.  **Test the connection**:
+    ```bash
+    ssh -T git@github.com
+    # Type 'yes' to verify fingerprint.
+    # You should see: "Hi <user/repo>! You've successfully authenticated..."
+    ```
+
+5.  **Switch Remote to SSH (if already cloned via HTTPS)**:
+    ```bash
+    cd ~/SAS_Builders_Backend
+    git remote set-url origin git@github.com:YourOrg/SAS_Builders_Backend.git
+    ```
+
+### 5.3 Trigger Deployment
 1.  Push your code to the `prod` branch.
 2.  Go to the **Actions** tab in GitHub.
 3.  Watch the **Deploy to AWS EC2** workflow.
