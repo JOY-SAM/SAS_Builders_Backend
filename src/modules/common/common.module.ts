@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TerminusModule } from '@nestjs/terminus';
 
-import { HealthController } from './controller';
+import { HealthController, HelloController } from './controller';
 import { LogInterceptor } from './flow';
 import { configProvider, LoggerService, PrismaService } from './provider';
 
@@ -22,7 +22,8 @@ import { configProvider, LoggerService, PrismaService } from './provider';
         PrismaService
     ],
     controllers: [
-        HealthController
+        HealthController,
+        HelloController
     ],
 })
 export class CommonModule {}
