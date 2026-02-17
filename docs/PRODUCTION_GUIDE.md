@@ -140,8 +140,11 @@ Since we are using a private repository, we need to authorize the server to pull
 
 4.  **Test the connection**:
     ```bash
+```bash
+    chmod 600 ~/.ssh/config
     ssh -T git@github.com
     # Type 'yes' to verify fingerprint.
+```
     # You should see: "Hi <user/repo>! You've successfully authenticated..."
     ```
 
