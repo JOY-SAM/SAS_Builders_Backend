@@ -56,12 +56,15 @@ Vehicles, drivers, expenses and engine-hour-based oil change tracking, served by
 
 **Consumed by the [SAS Builders](https://github.com/JOY-SAM/SAS_Builders) frontend**
 
-<table>
-  <tr>
-    <td width="50%"><img src="docs/screenshots/expenses.png" alt="Expense dashboard" /></td>
-    <td width="50%"><img src="docs/screenshots/oil-change-alerts.png" alt="Oil change alerts" /></td>
-  </tr>
-</table>
+### Expense dashboard
+
+![Expense dashboard](docs/screenshots/expenses.png)
+
+<br />
+
+### Oil change alerts
+
+![Oil change dashboard with the alerts popover open](docs/screenshots/oil-change-alerts.png)
 
 ## Tech stack
 
