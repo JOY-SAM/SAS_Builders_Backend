@@ -1,8 +1,8 @@
 {
-  "name": "nest-template",
+  "name": "sas-builders-backend",
   "version": "0.1.0",
   "description": "NestJS API project template crafted for Docker environments",
-  "author": "Saluki",
+  "author": "JOY",
   "license": "MIT",
   "private": true,
   "engines": {
